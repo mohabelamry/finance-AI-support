@@ -1,0 +1,36 @@
+{
+  "name": "finance-ai-support",
+  "version": "1.0.0",
+  "description": "this finance ai assistant are using python and ai llm to monitor and track all invoices and outstanding",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test src/invoices.test.js",
+    "test:browser": "node tests/browser.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohabelamry/finance-AI-support.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/mohabelamry/finance-AI-support/issues"
+  },
+  "homepage": "https://github.com/mohabelamry/finance-AI-support#readme",
+  "dependencies": {
+    "@azure/msal-browser": "^5.25.0",
+    "lucide-react": "^1.55.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "xlsx": "npm:@e965/xlsx@^0.20.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "vite": "^8.3.4"
+  }
+}
