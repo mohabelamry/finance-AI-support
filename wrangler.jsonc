@@ -1,0 +1,10 @@
+{
+  // Tells Cloudflare where the built dashboard lives and to open the
+  // dashboard home page for any address inside the app.
+  "name": "finance-ai-support",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
