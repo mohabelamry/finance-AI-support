@@ -31,16 +31,17 @@ Invoices, connection identifiers and action history are stored in localStorage o
 
 ## Microsoft 365 setup
 
-For each tenant, your administrator must register a Microsoft Entra ID application:
+One Microsoft Entra ID app registration can serve both the Finance and Escalation accounts:
 
-1. Add a **Single-page application** redirect URI matching the exact site origin (for local development, http://localhost:5173).
-2. Configure delegated Graph `User.Read` and `Mail.Send` permissions. Grant consent as required by tenant policy.
-3. Enter the Directory (tenant) ID and Application (client) ID in Settings.
-4. Sign in with Microsoft using an account with a licensed Exchange Online mailbox. The first connection defaults to reminders, the second to escalations; the sender can be changed in the preview.
+1. Entra admin center → App registrations → New registration. Choose who can sign in (one organization, or any organization and personal Microsoft accounts).
+2. Authentication → Add a platform → **Single-page application**, with redirect URI `https://<your-site>/auth/` (for local development, `http://localhost:5173/auth/`). Settings shows the exact value for the current site.
+3. API permissions → Microsoft Graph → Delegated → `User.Read` and `Mail.Send`. Grant admin consent if your tenant requires it.
+4. In Settings, paste the Application (client) ID. The Directory (tenant) ID is optional; enter it when the app is limited to a single organization.
+5. Click Sign in with Microsoft and allow pop-ups for the site. Use an account with a licensed Exchange Online (or Outlook.com) mailbox.
 
-No password or client secret is entered or saved. MSAL stores authentication state in sessionStorage; expired sessions may require signing in again. Production requires HTTPS. Allow access to login.microsoftonline.com and graph.microsoft.com. Fonts use fonts.googleapis.com and fonts.gstatic.com, with system fallbacks.
+Optional: set the Cloudflare build variables `VITE_MS_CLIENT_ID` (and `VITE_MS_TENANT_ID`) so the IDs are pre-filled for everyone and users only click Sign in.
 
-Real sign-in and sending require your tenant configuration and have not been validated against a real mailbox. The UI does not claim a connection until Microsoft sign-in succeeds.
+Microsoft returns to `/auth/`, a small page that passes the sign-in result back to the dashboard (required by MSAL Browser v5 popups). No password or client secret is entered or saved. MSAL keeps authentication state in this browser's localStorage; Disconnect removes it. Production requires HTTPS. Allow access to login.microsoftonline.com and graph.microsoft.com. Fonts use fonts.googleapis.com and fonts.gstatic.com, with system fallbacks.
 
 ## Validation
 
